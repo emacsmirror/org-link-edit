@@ -151,8 +151,7 @@ website is"
   (should-error
    (org-test-with-temp-text
        "\[\[http://orgmode.org/\]\[Org's\]\] website is"
-     (org-link-edit-forward-slurp 3)
-     (buffer-string))
+     (org-link-edit-forward-slurp 3))
    :type 'user-error))
 
 (ert-deftest test-org-link-edit/backward-slurp ()
@@ -260,8 +259,7 @@ website is"
   (should-error
    (org-test-with-temp-text
        "Here is <point>\[\[http://orgmode.org/\]\[Org's\]\] website"
-     (org-link-edit-backward-slurp 3)
-     (buffer-string))
+     (org-link-edit-backward-slurp 3))
    :type 'user-error))
 
 (ert-deftest test-org-link-edit/slurp-negative-argument ()
@@ -346,8 +344,7 @@ website is"
   (should-error
    (org-test-with-temp-text
        "Org's <point>\[\[http://orgmode.org/\]\[website is\]\]"
-     (org-link-edit-forward-barf 3)
-     (buffer-string))
+     (org-link-edit-forward-barf 3))
    :type 'user-error))
 
 (ert-deftest test-org-link-edit/backward-barf ()
@@ -413,8 +410,7 @@ website is"
   (should-error
    (org-test-with-temp-text
        "Org's <point>\[\[http://orgmode.org/\]\[website is\]\]"
-     (org-link-edit-backward-barf 3)
-     (buffer-string))
+     (org-link-edit-backward-barf 3))
    :type 'user-error))
 
 (ert-deftest test-org-link-edit/barf-negative-argument ()
@@ -565,22 +561,19 @@ website"
   (should-error
    (org-test-with-temp-text
        "Here is Org's website http://orgmode.org/<point>"
-     (org-link-edit-transport-next-link)
-     (buffer-string))
+     (org-link-edit-transport-next-link))
    :type 'user-error)
   (should-error
    (org-test-with-temp-text
        "Here is Org's website <point>http://orgmode.org/"
      (org-link-edit-transport-next-link
-      nil (point-min) (point))
-     (buffer-string))
+      nil (point-min) (point)))
    :type 'user-error)
   ;; Fail if link already has a description.
   (should-error
    (org-test-with-temp-text
        "Here is <point>Org's website \[\[http://orgmode.org/\]\[description\]\]"
-     (org-link-edit-transport-next-link)
-     (buffer-string))
+     (org-link-edit-transport-next-link))
    :type 'user-error))
 
 

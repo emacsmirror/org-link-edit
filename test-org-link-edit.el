@@ -556,9 +556,9 @@ website"
   ;; point is on whitespace.
   (should
    (string=
-    "Here is\[\[http://orgmode.org/\]\[descrption\]\] Org's website "
+    "Here is\[\[http://orgmode.org/\]\[description\]\] Org's website "
     (org-test-with-temp-text
-        "Here is<point> Org's website \[\[http://orgmode.org/\]\[descrption\]\]"
+        "Here is<point> Org's website \[\[http://orgmode.org/\]\[description\]\]"
       (org-link-edit-transport-next-link)
       (buffer-string))))
   ;; Fail if point is on a link.
@@ -578,7 +578,7 @@ website"
   ;; Fail if link already has a description.
   (should-error
    (org-test-with-temp-text
-       "Here is <point>Org's website \[\[http://orgmode.org/\]\[descrption\]\]"
+       "Here is <point>Org's website \[\[http://orgmode.org/\]\[description\]\]"
      (org-link-edit-transport-next-link)
      (buffer-string))
    :type 'user-error))

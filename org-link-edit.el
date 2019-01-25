@@ -348,8 +348,8 @@ With prefix argument PREVIOUS, move the previous link instead of
 the next link.
 
 Non-interactively, use the text between BEG and END as the
-description, moving the next (or previous) link relative BEG and
-END."
+description, moving the next (or previous) link relative to BEG
+and END."
   (interactive (cons current-prefix-arg
                      (and (use-region-p)
                           (list (region-beginning) (region-end)))))

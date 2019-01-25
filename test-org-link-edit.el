@@ -533,6 +533,15 @@ website"
               (org-link-edit-transport-next-link
                nil (point-min) (point))
               (buffer-string))))
+  ;; When a lisp caller gives BEG and END explicitly, they take
+  ;; precedence over point.
+  (should
+   (string= "Here is \[\[http://orgmode.org/\]\[Org's\]\] website "
+            (org-test-with-temp-text
+                "<point>Here is Org's website http://orgmode.org/"
+              (org-link-edit-transport-next-link
+               nil 9 14)
+              (buffer-string))))
   ;; Transport previous link to the active region.
   (should
    (string= " Here is \[\[http://orgmode.org/\]\[Org's website\]\]"

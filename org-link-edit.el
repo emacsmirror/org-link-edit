@@ -338,7 +338,7 @@ If N is negative, barf trailing blobs instead of leading blobs."
       (user-error "No %s link found" (if previous "previous" "next")))))
 
 ;;;###autoload
-(defun org-link-edit-transport-next-link (&optional previous beg end)
+(defun org-link-edit-transport-next-link (&optional previous beg end overwrite)
   "Move the next link to point.
 
 If the region is active, use the selected text as the link's
@@ -349,10 +349,15 @@ the next link.
 
 Non-interactively, use the text between BEG and END as the
 description, moving the next (or previous) link relative to BEG
-and END."
-  (interactive (cons current-prefix-arg
-                     (and (use-region-p)
-                          (list (region-beginning) (region-end)))))
+and END.  By default, refuse to overwrite an existing
+description.  If OVERWRITE is `ask', prompt for confirmation
+before overwriting; for any other non-nil value, overwrite
+without asking."
+  (interactive `(,current-prefix-arg
+                 ,@(if (use-region-p)
+                       (list (region-beginning) (region-end))
+                     (list nil nil))
+                 ask))
   (let ((pt (point))
         (desc-bounds (cond
                       ((and beg end)
@@ -376,7 +381,11 @@ and END."
     (goto-char (or (car desc-bounds) pt))
     (cl-multiple-value-bind (link-beg link-end link orig-desc)
         (org-link-edit--next-link-data previous)
-      (unless (or (not desc-bounds) (= (length orig-desc) 0))
+      (unless (or (not desc-bounds)
+                  (= (length orig-desc) 0)
+                  (if (eq overwrite 'ask)
+                      (y-or-n-p "Overwrite existing description?")
+                    overwrite))
         (user-error "Link already has a description"))
       (delete-region link-beg link-end)
       (insert (org-make-link-string

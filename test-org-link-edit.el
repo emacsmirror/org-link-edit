@@ -578,12 +578,26 @@ website"
      (org-link-edit-transport-next-link
       nil (point-min) (point)))
    :type 'user-error)
-  ;; Fail if link already has a description.
+  ;; Fail if link already has a description, unless caller confirms
+  ;; the overwrite.
+  (should-error
+   (org-test-with-temp-text
+       "Here is <point>Org's website \[\[http://orgmode.org/\]\[description\]\]"
+     (cl-letf (((symbol-function 'y-or-n-p) (lambda (_) nil)))
+       (call-interactively #'org-link-edit-transport-next-link)))
+   :type 'user-error)
   (should-error
    (org-test-with-temp-text
        "Here is <point>Org's website \[\[http://orgmode.org/\]\[description\]\]"
      (org-link-edit-transport-next-link))
-   :type 'user-error))
+   :type 'user-error)
+  (should
+   (string=
+    "Here is \[\[http://orgmode.org/\]\[Org's\]\] website "
+    (org-test-with-temp-text
+        "Here is <point>Org's website \[\[http://orgmode.org/\]\[description\]\]"
+      (org-link-edit-transport-next-link nil nil nil 'overwrite)
+      (buffer-string)))))
 
 
 ;;; Other

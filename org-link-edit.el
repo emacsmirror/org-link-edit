@@ -67,12 +67,7 @@
 (require 'cl-lib)
 
 (defun org-link-edit--on-link-p (&optional element)
-  (let ((el (or element (org-element-context))))
-    ;; Don't use `org-element-lineage' because it isn't available
-    ;; until Org version 8.3.
-    (while (and el (not (memq (car el) '(link))))
-      (setq el (org-element-property :parent el)))
-    (eq (car el) 'link)))
+  (org-element-lineage (or element (org-element-context)) '(link) t))
 
 (defun org-link-edit--link-data ()
   "Return list with information about the link at point.

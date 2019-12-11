@@ -6,7 +6,7 @@
 ;; URL: https://git.sr.ht/~kyleam/org-link-edit
 ;; Keywords: convenience
 ;; Version: 1.1.1
-;; Package-Requires: ((cl-lib "0.5") (org "8.2.10"))
+;; Package-Requires: ((cl-lib "0.5") (org "9.3"))
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -95,9 +95,7 @@ The list includes
               (match-end 0)
               (save-match-data
                 (org-link-unescape (match-string-no-properties 1)))
-              (or (and (match-end 3)
-                       (match-string-no-properties 3))
-                  "")))
+              (or (match-string-no-properties 2) "")))
        ((looking-at org-plain-link-re)
         (list (match-beginning 0)
               (match-end 0)

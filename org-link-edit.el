@@ -90,13 +90,13 @@ The list includes
        ;; Use match-{beginning,end} because match-end is consistently
        ;; positioned after ]], while the :end property is positioned
        ;; at the next word on the line, if one is present.
-       ((looking-at org-bracket-link-regexp)
+       ((looking-at org-link-bracket-re)
         (list (match-beginning 0)
               (match-end 0)
               (save-match-data
                 (org-link-unescape (match-string-no-properties 1)))
               (or (match-string-no-properties 2) "")))
-       ((looking-at org-plain-link-re)
+       ((looking-at org-link-plain-re)
         (list (match-beginning 0)
               (match-end 0)
               (org-link-unescape (match-string-no-properties 0))
@@ -170,7 +170,7 @@ If N is negative, slurp leading blobs instead of trailing blobs."
         (setq desc (concat desc slurped)
               end (+ end (length slurped)))
         (delete-region beg (point))
-        (insert (org-make-link-string link desc))
+        (insert (org-link-make-string link desc))
         (goto-char beg)
         slurped)))))
 
@@ -212,7 +212,7 @@ If N is negative, slurp trailing blobs instead of leading blobs."
         (setq desc (concat slurped desc)
               beg (- beg (length slurped)))
         (delete-region (point) end)
-        (insert (org-make-link-string link desc))
+        (insert (org-link-make-string link desc))
         (goto-char beg)
         slurped)))))
 
@@ -282,7 +282,7 @@ If N is negative, barf leading blobs instead of trailing blobs."
         (unless new-desc (user-error "Not enough blobs in description"))
         (goto-char beg)
         (delete-region beg end)
-        (insert (org-make-link-string link new-desc))
+        (insert (org-link-make-string link new-desc))
         (when (string= new-desc "")
           (setq barfed (concat " " barfed)))
         (insert barfed)
@@ -321,7 +321,7 @@ If N is negative, barf trailing blobs instead of leading blobs."
         (unless new-desc (user-error "Not enough blobs in description"))
         (goto-char beg)
         (delete-region beg end)
-        (insert (org-make-link-string link new-desc))
+        (insert (org-link-make-string link new-desc))
         (when (string= new-desc "")
           (setq barfed (concat barfed " ")))
         (goto-char beg)
@@ -331,7 +331,7 @@ If N is negative, barf trailing blobs instead of leading blobs."
 (defun org-link-edit--next-link-data (&optional previous)
   (save-excursion
     (if (funcall (if previous #'re-search-backward #'re-search-forward)
-                 org-any-link-re nil t)
+                 org-link-any-re nil t)
         (org-link-edit--link-data)
       (user-error "No %s link found" (if previous "previous" "next")))))
 
@@ -386,7 +386,7 @@ without asking."
                     overwrite))
         (user-error "Link already has a description"))
       (delete-region link-beg link-end)
-      (insert (org-make-link-string
+      (insert (org-link-make-string
                link
                (if desc-bounds
                    (delete-and-extract-region (car desc-bounds)

@@ -3,7 +3,7 @@
 ;; Copyright (C) 2015-2019 Kyle Meyer <kyle@kyleam.com>
 
 ;; Author:  Kyle Meyer <kyle@kyleam.com>
-;; URL: https://git.sr.ht/~kyleam/org-link-edit
+;; URL: https://git.kyleam.com/org-link-edit/about
 ;; Keywords: convenience
 ;; Version: 1.1.1
 ;; Package-Requires: ((cl-lib "0.5") (org "9.3"))

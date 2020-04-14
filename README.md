@@ -32,7 +32,7 @@ you can configure the repository's default prefix:
     git config format.subjectPrefix "PATCH org-link-edit"
 
 For more information on sending patches, visit
-<https://man.sr.ht/git.sr.ht/send-email.md>.
+<https://git-send-email.io/>.
 
 [lst]: mailto:misc@inbox.kyleam.com
 [cpy]: https://www.gnu.org/software/emacs/manual/html_node/emacs/Copyright-Assignment.html

@@ -94,7 +94,7 @@ The list includes
        ((looking-at org-link-plain-re)
         (list (match-beginning 0)
               (match-end 0)
-              (org-link-unescape (match-string-no-properties 0))
+              (match-string-no-properties 0)
               nil))
        (t
         (error "What am I looking at?"))))))

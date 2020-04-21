@@ -51,106 +51,106 @@ otherwise place the point at the beginning of the inserted text."
   ;; Slurp one blob into plain link.
   (should
    (string=
-    "\[\[http://orgmode.org/\]\[Org's\]\] website is"
+    "\[\[https://orgmode.org/\]\[Org's\]\] website is"
     (org-test-with-temp-text
-        "http://orgmode.org/ Org's website is"
+        "https://orgmode.org/ Org's website is"
       (org-link-edit-forward-slurp)
       (buffer-string))))
   ;; Slurp one blob into empty bracket link.
   (should
    (string=
-    "\[\[http://orgmode.org/\]\[Org's\]\] website is"
+    "\[\[https://orgmode.org/\]\[Org's\]\] website is"
     (org-test-with-temp-text
-        "\[\[http://orgmode.org/\]\] Org's website is"
+        "\[\[https://orgmode.org/\]\] Org's website is"
       (org-link-edit-forward-slurp)
       (buffer-string))))
   ;; Slurp one blob into bracket link.
   (should
    (string=
-    "\[\[http://orgmode.org/\]\[Org's website\]\] is"
+    "\[\[https://orgmode.org/\]\[Org's website\]\] is"
     (org-test-with-temp-text
-        "\[\[http://orgmode.org/\]\[Org's\]\] website is"
+        "\[\[https://orgmode.org/\]\[Org's\]\] website is"
       (org-link-edit-forward-slurp)
       (buffer-string))))
   ;; Slurp one blob, but not trailing punctuation, into bracket link.
   (should
    (string=
-    "\[\[http://orgmode.org/\]\[Org's website\]\]."
+    "\[\[https://orgmode.org/\]\[Org's website\]\]."
     (org-test-with-temp-text
-        "\[\[http://orgmode.org/\]\[Org's\]\] website."
+        "\[\[https://orgmode.org/\]\[Org's\]\] website."
       (org-link-edit-forward-slurp)
       (buffer-string))))
   ;; Slurp all-punctuation blob into bracket link.
   (should
    (string=
-    "\[\[http://orgmode.org/\]\[Org's .?.?\]\]"
+    "\[\[https://orgmode.org/\]\[Org's .?.?\]\]"
     (org-test-with-temp-text
-        "\[\[http://orgmode.org/\]\[Org's\]\] .?.?"
+        "\[\[https://orgmode.org/\]\[Org's\]\] .?.?"
       (org-link-edit-forward-slurp)
       (buffer-string))))
   ;; Slurping blob with point beyond link, but technically still
   ;; within link element.
   (should
    (string=
-    "Org's \[\[http://orgmode.org/\]\[website  is\]\]"
+    "Org's \[\[https://orgmode.org/\]\[website  is\]\]"
     (org-test-with-temp-text
-        "Org's \[\[http://orgmode.org/\]\[website\]\] <point> is"
+        "Org's \[\[https://orgmode.org/\]\[website\]\] <point> is"
       (org-link-edit-forward-slurp)
       (buffer-string))))
   ;; Slurp two blobs into plain link.
   (should
    (string=
-    "\[\[http://orgmode.org/\]\[Org's website\]\] is"
+    "\[\[https://orgmode.org/\]\[Org's website\]\] is"
     (org-test-with-temp-text
-        "http://orgmode.org/ Org's website is"
+        "https://orgmode.org/ Org's website is"
       (org-link-edit-forward-slurp 2)
       (buffer-string))))
   ;; Slurp two blobs into bracket link.
   (should
    (string=
-    "\[\[http://orgmode.org/\]\[Org's website is\]\]"
+    "\[\[https://orgmode.org/\]\[Org's website is\]\]"
     (org-test-with-temp-text
-        "\[\[http://orgmode.org/\]\[Org's\]\] website is"
+        "\[\[https://orgmode.org/\]\[Org's\]\] website is"
       (org-link-edit-forward-slurp 2)
       (buffer-string))))
   ;; Slurp new line as space.
   (should
    (string=
-    "\[\[http://orgmode.org/\]\[Org's website\]\] is"
+    "\[\[https://orgmode.org/\]\[Org's website\]\] is"
     (org-test-with-temp-text
-        "\[\[http://orgmode.org/\]\[Org's\]\]
+        "\[\[https://orgmode.org/\]\[Org's\]\]
 website is"
       (org-link-edit-forward-slurp 1)
       (buffer-string))))
   ;; Collapse stretches of new lines.
   (should
    (string=
-    "\[\[http://orgmode.org/\]\[Org's website is\]\]"
+    "\[\[https://orgmode.org/\]\[Org's website is\]\]"
     (org-test-with-temp-text
-        "\[\[http://orgmode.org/\]\[Org's\]\]
+        "\[\[https://orgmode.org/\]\[Org's\]\]
 \n\nwebsite\n\n\nis"
       (org-link-edit-forward-slurp 2)
       (buffer-string))))
   ;; Slurp blob that has no whitespace.
   (should
    (string=
-    "\[\[http://orgmode.org/\]\[website\]\]"
+    "\[\[https://orgmode.org/\]\[website\]\]"
     (org-test-with-temp-text
-        "\[\[http://orgmode.org/\]\]website"
+        "\[\[https://orgmode.org/\]\]website"
       (org-link-edit-forward-slurp 1)
       (buffer-string))))
   ;; Slurp blob that isn't separated from link by whitespace.
   (should
    (string=
-    "\[\[http://orgmode.org/\]\[-website\]\]"
+    "\[\[https://orgmode.org/\]\[-website\]\]"
     (org-test-with-temp-text
-        "\[\[http://orgmode.org/\]\]-website"
+        "\[\[https://orgmode.org/\]\]-website"
       (org-link-edit-forward-slurp 1)
       (buffer-string))))
   ;; Slurp beyond the number of present blobs.
   (should-error
    (org-test-with-temp-text
-       "\[\[http://orgmode.org/\]\[Org's\]\] website is"
+       "\[\[https://orgmode.org/\]\[Org's\]\] website is"
      (org-link-edit-forward-slurp 3))
    :type 'user-error))
 
@@ -159,106 +159,106 @@ website is"
   ;; Slurp one blob into plain link.
   (should
    (string=
-    "Here \[\[http://orgmode.org/\]\[is\]\] Org's website"
+    "Here \[\[https://orgmode.org/\]\[is\]\] Org's website"
     (org-test-with-temp-text
-        "Here is <point>http://orgmode.org/ Org's website"
+        "Here is <point>https://orgmode.org/ Org's website"
       (org-link-edit-backward-slurp)
       (buffer-string))))
   ;; Slurp one blob into empty bracket link.
   (should
    (string=
-    "Here \[\[http://orgmode.org/\]\[is\]\] Org's website"
+    "Here \[\[https://orgmode.org/\]\[is\]\] Org's website"
     (org-test-with-temp-text
-        "Here is <point>\[\[http://orgmode.org/\]\] Org's website"
+        "Here is <point>\[\[https://orgmode.org/\]\] Org's website"
       (org-link-edit-backward-slurp)
       (buffer-string))))
   ;; Slurp one blob into bracket link.
   (should
    (string=
-    "Here \[\[http://orgmode.org/\]\[is Org's\]\] website"
+    "Here \[\[https://orgmode.org/\]\[is Org's\]\] website"
     (org-test-with-temp-text
-        "Here is <point>\[\[http://orgmode.org/\]\[Org's\]\] website"
+        "Here is <point>\[\[https://orgmode.org/\]\[Org's\]\] website"
       (org-link-edit-backward-slurp)
       (buffer-string))))
   ;; Slurp one blob with trailing punctuation into bracket link.
   (should
    (string=
-    "Here \[\[http://orgmode.org/\]\[is: Org's\]\] website."
+    "Here \[\[https://orgmode.org/\]\[is: Org's\]\] website."
     (org-test-with-temp-text
-        "Here is: <point>\[\[http://orgmode.org/\]\[Org's\]\] website."
+        "Here is: <point>\[\[https://orgmode.org/\]\[Org's\]\] website."
       (org-link-edit-backward-slurp)
       (buffer-string))))
   ;; Slurp all-punctuation blob into bracket link.
   (should
    (string=
-    "Here \[\[http://orgmode.org/\]\[... Org's\]\] website."
+    "Here \[\[https://orgmode.org/\]\[... Org's\]\] website."
     (org-test-with-temp-text
-        "Here ... <point>\[\[http://orgmode.org/\]\[Org's\]\] website."
+        "Here ... <point>\[\[https://orgmode.org/\]\[Org's\]\] website."
       (org-link-edit-backward-slurp)
       (buffer-string))))
   ;; Slurping blob with point beyond link, but technically still
   ;; within link element.
   (should
    (string=
-    "\[\[http://orgmode.org/\]\[Org's website\]\]  is"
+    "\[\[https://orgmode.org/\]\[Org's website\]\]  is"
     (org-test-with-temp-text
-        "Org's \[\[http://orgmode.org/\]\[website\]\] <point> is"
+        "Org's \[\[https://orgmode.org/\]\[website\]\] <point> is"
       (org-link-edit-backward-slurp)
       (buffer-string))))
   ;; Slurp two blobs into plain link.
   (should
    (string=
-    "\[\[http://orgmode.org/\]\[Here is\]\] Org's website"
+    "\[\[https://orgmode.org/\]\[Here is\]\] Org's website"
     (org-test-with-temp-text
-        "Here is <point>http://orgmode.org/ Org's website"
+        "Here is <point>https://orgmode.org/ Org's website"
       (org-link-edit-backward-slurp 2)
       (buffer-string))))
   ;; Slurp two blobs into bracket link.
   (should
    (string=
-    "\[\[http://orgmode.org/\]\[Here is Org's\]\] website"
+    "\[\[https://orgmode.org/\]\[Here is Org's\]\] website"
     (org-test-with-temp-text
-        "Here is <point>\[\[http://orgmode.org/\]\[Org's\]\] website"
+        "Here is <point>\[\[https://orgmode.org/\]\[Org's\]\] website"
       (org-link-edit-backward-slurp 2)
       (buffer-string))))
   ;; Slurp new line as space.
   (should
    (string=
-    "Here \[\[http://orgmode.org/\]\[is Org's website\]\]"
+    "Here \[\[https://orgmode.org/\]\[is Org's website\]\]"
     (org-test-with-temp-text
         "Here is
-<point>\[\[http://orgmode.org/\]\[Org's website\]\]"
+<point>\[\[https://orgmode.org/\]\[Org's website\]\]"
       (org-link-edit-backward-slurp 1)
       (buffer-string))))
   ;; Collapse stretches of new lines.
   (should
    (string=
-    "\[\[http://orgmode.org/\]\[Here is Org's website\]\]"
+    "\[\[https://orgmode.org/\]\[Here is Org's website\]\]"
     (org-test-with-temp-text
         "Here\n\nis\n\n\n
-<point>\[\[http://orgmode.org/\]\[Org's website\]\]"
+<point>\[\[https://orgmode.org/\]\[Org's website\]\]"
       (org-link-edit-backward-slurp 2)
       (buffer-string))))
   ;; Slurp blob that has no whitespace.
   (should
    (string=
-    "Here \[\[http://orgmode.org/\]\[is\]\] Org's website"
+    "Here \[\[https://orgmode.org/\]\[is\]\] Org's website"
     (org-test-with-temp-text
-        "Here is<point>\[\[http://orgmode.org/\]\] Org's website"
+        "Here is<point>\[\[https://orgmode.org/\]\] Org's website"
       (org-link-edit-backward-slurp 1)
       (buffer-string))))
   ;; Slurp blob that isn't separated from link by whitespace.
   (should
    (string=
-    "Here \[\[http://orgmode.org/\]\[is-\]\] Org's website"
+    "Here \[\[https://orgmode.org/\]\[is-\]\] Org's website"
     (org-test-with-temp-text
-        "Here is-<point>\[\[http://orgmode.org/\]\] Org's website"
+        "Here is-<point>\[\[https://orgmode.org/\]\] Org's website"
       (org-link-edit-backward-slurp 1)
       (buffer-string))))
   ;; Slurp beyond the number of present blobs.
   (should-error
    (org-test-with-temp-text
-       "Here is <point>\[\[http://orgmode.org/\]\[Org's\]\] website"
+       "Here is <point>\[\[https://orgmode.org/\]\[Org's\]\] website"
      (org-link-edit-backward-slurp 3))
    :type 'user-error))
 
@@ -268,21 +268,21 @@ website is"
   (should
    (string=
     (org-test-with-temp-text
-        "Here is <point>\[\[http://orgmode.org/\]\[Org's\]\] website"
+        "Here is <point>\[\[https://orgmode.org/\]\[Org's\]\] website"
       (org-link-edit-forward-slurp 1)
       (buffer-string))
     (org-test-with-temp-text
-        "Here is <point>\[\[http://orgmode.org/\]\[Org's\]\] website"
+        "Here is <point>\[\[https://orgmode.org/\]\[Org's\]\] website"
       (org-link-edit-backward-slurp -1)
       (buffer-string))))
   (should
    (string=
     (org-test-with-temp-text
-        "Here is <point>\[\[http://orgmode.org/\]\[Org's\]\] website"
+        "Here is <point>\[\[https://orgmode.org/\]\[Org's\]\] website"
       (org-link-edit-forward-slurp -1)
       (buffer-string))
     (org-test-with-temp-text
-        "Here is <point>\[\[http://orgmode.org/\]\[Org's\]\] website"
+        "Here is <point>\[\[https://orgmode.org/\]\[Org's\]\] website"
       (org-link-edit-backward-slurp)
       (buffer-string)))))
 
@@ -294,56 +294,56 @@ website is"
   ;; Barf last blob.
   (should
    (string=
-    "Org's \[\[http://orgmode.org/\]\] website is"
+    "Org's \[\[https://orgmode.org/\]\] website is"
     (org-test-with-temp-text
-        "Org's <point>\[\[http://orgmode.org/\]\[website\]\] is"
+        "Org's <point>\[\[https://orgmode.org/\]\[website\]\] is"
       (org-link-edit-forward-barf)
       (buffer-string))))
   ;; Barfing last blob with point beyond link, but technically still
   ;; within link element.
   (should
    (string=
-    "Org's \[\[http://orgmode.org/\]\] website  is"
+    "Org's \[\[https://orgmode.org/\]\] website  is"
     (org-test-with-temp-text
-        "Org's \[\[http://orgmode.org/\]\[website\]\] <point> is"
+        "Org's \[\[https://orgmode.org/\]\[website\]\] <point> is"
       (org-link-edit-forward-barf)
       (buffer-string))))
   ;; Barf last blob with puctuation.
   (should
    (string=
-    "Org's \[\[http://orgmode.org/\]\] website,"
+    "Org's \[\[https://orgmode.org/\]\] website,"
     (org-test-with-temp-text
-        "Org's <point>\[\[http://orgmode.org/\]\[website,\]\]"
+        "Org's <point>\[\[https://orgmode.org/\]\[website,\]\]"
       (org-link-edit-forward-barf)
       (buffer-string))))
   ;; Barf last blob, all punctuation.
   (should
    (string=
-    "Org's \[\[http://orgmode.org/\]\] ..."
+    "Org's \[\[https://orgmode.org/\]\] ..."
     (org-test-with-temp-text
-        "Org's <point>\[\[http://orgmode.org/\]\[...\]\]"
+        "Org's <point>\[\[https://orgmode.org/\]\[...\]\]"
       (org-link-edit-forward-barf)
       (buffer-string))))
   ;; Barf two last blobs.
   (should
    (string=
-    "Org's \[\[http://orgmode.org/\]\] website is"
+    "Org's \[\[https://orgmode.org/\]\] website is"
     (org-test-with-temp-text
-        "Org's <point>\[\[http://orgmode.org/\]\[website is\]\]"
+        "Org's <point>\[\[https://orgmode.org/\]\[website is\]\]"
       (org-link-edit-forward-barf 2)
       (buffer-string))))
   ;; Barf one blob, not last.
   (should
    (string=
-    "Org's \[\[http://orgmode.org/\]\[website\]\] is"
+    "Org's \[\[https://orgmode.org/\]\[website\]\] is"
     (org-test-with-temp-text
-        "Org's <point>\[\[http://orgmode.org/\]\[website is\]\]"
+        "Org's <point>\[\[https://orgmode.org/\]\[website is\]\]"
       (org-link-edit-forward-barf 1)
       (buffer-string))))
   ;; Barf beyond the number of present blobs.
   (should-error
    (org-test-with-temp-text
-       "Org's <point>\[\[http://orgmode.org/\]\[website is\]\]"
+       "Org's <point>\[\[https://orgmode.org/\]\[website is\]\]"
      (org-link-edit-forward-barf 3))
    :type 'user-error))
 
@@ -352,64 +352,64 @@ website is"
   ;; Barf last blob.
   (should
    (string=
-    "Org's website \[\[http://orgmode.org/\]\] is"
+    "Org's website \[\[https://orgmode.org/\]\] is"
     (org-test-with-temp-text
-        "Org's <point>\[\[http://orgmode.org/\]\[website\]\] is"
+        "Org's <point>\[\[https://orgmode.org/\]\[website\]\] is"
       (org-link-edit-backward-barf)
       (buffer-string))))
   ;; Barfing last blob with point beyond link, but technically still
   ;; within link element.
   (should
    (string=
-    "Org's website \[\[http://orgmode.org/\]\]  is"
+    "Org's website \[\[https://orgmode.org/\]\]  is"
     (org-test-with-temp-text
-        "Org's \[\[http://orgmode.org/\]\[website\]\] <point> is"
+        "Org's \[\[https://orgmode.org/\]\[website\]\] <point> is"
       (org-link-edit-backward-barf)
       (buffer-string))))
   ;; Barf last blob with puctuation.
   (should
    (string=
-    "Org's website: \[\[http://orgmode.org/\]\]"
+    "Org's website: \[\[https://orgmode.org/\]\]"
     (org-test-with-temp-text
-        "Org's <point>\[\[http://orgmode.org/\]\[website:\]\]"
+        "Org's <point>\[\[https://orgmode.org/\]\[website:\]\]"
       (org-link-edit-backward-barf)
       (buffer-string))))
   ;; Barf last all-puctuation blob.
   (should
    (string=
-    "Org's ... \[\[http://orgmode.org/\]\]"
+    "Org's ... \[\[https://orgmode.org/\]\]"
     (org-test-with-temp-text
-        "Org's <point>\[\[http://orgmode.org/\]\[...\]\]"
+        "Org's <point>\[\[https://orgmode.org/\]\[...\]\]"
       (org-link-edit-backward-barf)
       (buffer-string))))
   ;; Barf two last blobs.
   (should
    (string=
-    "Org's website is \[\[http://orgmode.org/\]\]"
+    "Org's website is \[\[https://orgmode.org/\]\]"
     (org-test-with-temp-text
-        "Org's <point>\[\[http://orgmode.org/\]\[website is\]\]"
+        "Org's <point>\[\[https://orgmode.org/\]\[website is\]\]"
       (org-link-edit-backward-barf 2)
       (buffer-string))))
   ;; Barf one blob, not last.
   (should
    (string=
-    "Org's website \[\[http://orgmode.org/\]\[is\]\]"
+    "Org's website \[\[https://orgmode.org/\]\[is\]\]"
     (org-test-with-temp-text
-        "Org's <point>\[\[http://orgmode.org/\]\[website is\]\]"
+        "Org's <point>\[\[https://orgmode.org/\]\[website is\]\]"
       (org-link-edit-backward-barf 1)
       (buffer-string))))
   ;; Barf one blob with punctuation, not last.
   (should
    (string=
-    "Org's website. \[\[http://orgmode.org/\]\[is\]\]"
+    "Org's website. \[\[https://orgmode.org/\]\[is\]\]"
     (org-test-with-temp-text
-        "Org's <point>\[\[http://orgmode.org/\]\[website. is\]\]"
+        "Org's <point>\[\[https://orgmode.org/\]\[website. is\]\]"
       (org-link-edit-backward-barf 1)
       (buffer-string))))
   ;; Barf beyond the number of present blobs.
   (should-error
    (org-test-with-temp-text
-       "Org's <point>\[\[http://orgmode.org/\]\[website is\]\]"
+       "Org's <point>\[\[https://orgmode.org/\]\[website is\]\]"
      (org-link-edit-backward-barf 3))
    :type 'user-error))
 
@@ -419,21 +419,21 @@ website is"
   (should
    (string=
     (org-test-with-temp-text
-        "Here is <point>\[\[http://orgmode.org/\]\[Org's\]\] website"
+        "Here is <point>\[\[https://orgmode.org/\]\[Org's\]\] website"
       (org-link-edit-forward-barf 1)
       (buffer-string))
     (org-test-with-temp-text
-        "Here is <point>\[\[http://orgmode.org/\]\[Org's\]\] website"
+        "Here is <point>\[\[https://orgmode.org/\]\[Org's\]\] website"
       (org-link-edit-backward-barf -1)
       (buffer-string))))
   (should
    (string=
     (org-test-with-temp-text
-        "Here is <point>\[\[http://orgmode.org/\]\[Org's\]\] website"
+        "Here is <point>\[\[https://orgmode.org/\]\[Org's\]\] website"
       (org-link-edit-forward-barf -1)
       (buffer-string))
     (org-test-with-temp-text
-        "Here is <point>\[\[http://orgmode.org/\]\[Org's\]\] website"
+        "Here is <point>\[\[https://orgmode.org/\]\[Org's\]\] website"
       (org-link-edit-backward-barf)
       (buffer-string)))))
 
@@ -452,30 +452,30 @@ website is"
   "Test `org-link-edit-forward-barf' and
 `org-link-edit-backward-barf' reversibility."
   (should
-   (string= "Here is \[\[http://orgmode.org/\]\[Org's\]\] website"
+   (string= "Here is \[\[https://orgmode.org/\]\[Org's\]\] website"
             (org-test-with-temp-text
-                "Here is <point>\[\[http://orgmode.org/\]\[Org's\]\] website"
+                "Here is <point>\[\[https://orgmode.org/\]\[Org's\]\] website"
               (org-link-edit-forward-barf 1)
               (org-link-edit-forward-slurp 1)
               (buffer-string))))
   (should
-   (string= "Here is \[\[http://orgmode.org/\]\] Org's website"
+   (string= "Here is \[\[https://orgmode.org/\]\] Org's website"
             (org-test-with-temp-text
-                "Here is <point>\[\[http://orgmode.org/\]\] Org's website"
+                "Here is <point>\[\[https://orgmode.org/\]\] Org's website"
               (org-link-edit-forward-slurp 1)
               (org-link-edit-forward-barf 1)
               (buffer-string))))
   (should
-   (string= "Here is \[\[http://orgmode.org/\]\[Org's\]\] website"
+   (string= "Here is \[\[https://orgmode.org/\]\[Org's\]\] website"
             (org-test-with-temp-text
-                "Here is <point>\[\[http://orgmode.org/\]\[Org's\]\] website"
+                "Here is <point>\[\[https://orgmode.org/\]\[Org's\]\] website"
               (org-link-edit-backward-barf 1)
               (org-link-edit-backward-slurp 1)
               (buffer-string))))
   (should
-   (string= "Here is \[\[http://orgmode.org/\]\[Org's\]\] website"
+   (string= "Here is \[\[https://orgmode.org/\]\[Org's\]\] website"
             (org-test-with-temp-text
-                "Here is <point>\[\[http://orgmode.org/\]\[Org's\]\] website"
+                "Here is <point>\[\[https://orgmode.org/\]\[Org's\]\] website"
               (org-link-edit-backward-slurp 1)
               (org-link-edit-backward-barf 1)
               (buffer-string))))
@@ -489,9 +489,9 @@ website is"
               (buffer-string))))
   ;; Failed round trip because of newline.
   (should
-   (string= "Here is \[\[http://orgmode.org/\]\[Org's\]\] website"
+   (string= "Here is \[\[https://orgmode.org/\]\[Org's\]\] website"
             (org-test-with-temp-text
-                "Here is <point>\[\[http://orgmode.org/\]\[Org's\]\]
+                "Here is <point>\[\[https://orgmode.org/\]\[Org's\]\]
 website"
               (org-link-edit-forward-slurp 1)
               (org-link-edit-forward-barf 1)
@@ -499,9 +499,9 @@ website"
   ;; Failed round trip because of empty description and more than one
   ;; whitespace.
   (should
-   (string= "Here is \[\[http://orgmode.org/\]\] website"
+   (string= "Here is \[\[https://orgmode.org/\]\] website"
             (org-test-with-temp-text
-                "Here is <point>\[\[http://orgmode.org/\]\]    website"
+                "Here is <point>\[\[https://orgmode.org/\]\]    website"
               (org-link-edit-forward-slurp 1)
               (org-link-edit-forward-barf 1)
               (buffer-string)))))
@@ -513,68 +513,68 @@ website"
   "Test `org-link-edit-transport-next-link'."
   ;; Transport next link to word at point.
   (should
-   (string= "Here is \[\[http://orgmode.org/\]\[Org's\]\] website "
+   (string= "Here is \[\[https://orgmode.org/\]\[Org's\]\] website "
             (org-test-with-temp-text
-                "Here is <point>Org's website http://orgmode.org/"
+                "Here is <point>Org's website https://orgmode.org/"
               (org-link-edit-transport-next-link)
               (buffer-string))))
   ;; Transport previous link to word at point.
   (should
-   (string= " Here is \[\[http://orgmode.org/\]\[Org's\]\] website"
+   (string= " Here is \[\[https://orgmode.org/\]\[Org's\]\] website"
             (org-test-with-temp-text
-                "http://orgmode.org/ Here is <point>Org's website"
+                "https://orgmode.org/ Here is <point>Org's website"
               (org-link-edit-transport-next-link 'previous)
               (buffer-string))))
   ;; Transport next link to the active region.
   (should
-   (string= "\[\[http://orgmode.org/\]\[Here is Org's\]\] website "
+   (string= "\[\[https://orgmode.org/\]\[Here is Org's\]\] website "
             (org-test-with-temp-text
-                "Here is Org's<point> website http://orgmode.org/"
+                "Here is Org's<point> website https://orgmode.org/"
               (org-link-edit-transport-next-link
                nil (point-min) (point))
               (buffer-string))))
   ;; When a lisp caller gives BEG and END explicitly, they take
   ;; precedence over point.
   (should
-   (string= "Here is \[\[http://orgmode.org/\]\[Org's\]\] website "
+   (string= "Here is \[\[https://orgmode.org/\]\[Org's\]\] website "
             (org-test-with-temp-text
-                "<point>Here is Org's website http://orgmode.org/"
+                "<point>Here is Org's website https://orgmode.org/"
               (org-link-edit-transport-next-link
                nil 9 14)
               (buffer-string))))
   ;; Transport previous link to the active region.
   (should
-   (string= " Here is \[\[http://orgmode.org/\]\[Org's website\]\]"
+   (string= " Here is \[\[https://orgmode.org/\]\[Org's website\]\]"
             (org-test-with-temp-text
-                "http://orgmode.org/ Here is <point>Org's website"
+                "https://orgmode.org/ Here is <point>Org's website"
               (org-link-edit-transport-next-link
                'previous (point) (point-max))
               (buffer-string))))
   ;; Transport next link with point on whitespace.
   (should
-   (string= "Here is\[\[http://orgmode.org/\]\] Org's website "
+   (string= "Here is\[\[https://orgmode.org/\]\] Org's website "
             (org-test-with-temp-text
-                "Here is<point> Org's website http://orgmode.org/"
+                "Here is<point> Org's website https://orgmode.org/"
               (org-link-edit-transport-next-link)
               (buffer-string))))
   ;; Transported links are allow to have an existing description when
   ;; point is on whitespace.
   (should
    (string=
-    "Here is\[\[http://orgmode.org/\]\[description\]\] Org's website "
+    "Here is\[\[https://orgmode.org/\]\[description\]\] Org's website "
     (org-test-with-temp-text
-        "Here is<point> Org's website \[\[http://orgmode.org/\]\[description\]\]"
+        "Here is<point> Org's website \[\[https://orgmode.org/\]\[description\]\]"
       (org-link-edit-transport-next-link)
       (buffer-string))))
   ;; Fail if point is on a link.
   (should-error
    (org-test-with-temp-text
-       "Here is Org's website http://orgmode.org/<point>"
+       "Here is Org's website https://orgmode.org/<point>"
      (org-link-edit-transport-next-link))
    :type 'user-error)
   (should-error
    (org-test-with-temp-text
-       "Here is Org's website <point>http://orgmode.org/"
+       "Here is Org's website <point>https://orgmode.org/"
      (org-link-edit-transport-next-link
       nil (point-min) (point)))
    :type 'user-error)
@@ -582,20 +582,20 @@ website"
   ;; the overwrite.
   (should-error
    (org-test-with-temp-text
-       "Here is <point>Org's website \[\[http://orgmode.org/\]\[description\]\]"
+       "Here is <point>Org's website \[\[https://orgmode.org/\]\[description\]\]"
      (cl-letf (((symbol-function 'y-or-n-p) (lambda (_) nil)))
        (call-interactively #'org-link-edit-transport-next-link)))
    :type 'user-error)
   (should-error
    (org-test-with-temp-text
-       "Here is <point>Org's website \[\[http://orgmode.org/\]\[description\]\]"
+       "Here is <point>Org's website \[\[https://orgmode.org/\]\[description\]\]"
      (org-link-edit-transport-next-link))
    :type 'user-error)
   (should
    (string=
-    "Here is \[\[http://orgmode.org/\]\[Org's\]\] website "
+    "Here is \[\[https://orgmode.org/\]\[Org's\]\] website "
     (org-test-with-temp-text
-        "Here is <point>Org's website \[\[http://orgmode.org/\]\[description\]\]"
+        "Here is <point>Org's website \[\[https://orgmode.org/\]\[description\]\]"
       (org-link-edit-transport-next-link nil nil nil 'overwrite)
       (buffer-string)))))
 
@@ -606,19 +606,19 @@ website"
   "Test `org-link-edit--on-link-p'."
   ;; On plain link
   (should
-   (org-test-with-temp-text "http://orgmode.org/"
+   (org-test-with-temp-text "https://orgmode.org/"
      (org-link-edit--on-link-p)))
   ;; On bracket link
   (should
-   (org-test-with-temp-text "\[\[http://orgmode.org/\]\[org\]\]"
+   (org-test-with-temp-text "\[\[https://orgmode.org/\]\[org\]\]"
      (org-link-edit--on-link-p)))
   ;; Point beyond link, but technically still within link element.
   (should
-   (org-test-with-temp-text "\[\[http://orgmode.org/\]\[org\]\] <point>"
+   (org-test-with-temp-text "\[\[https://orgmode.org/\]\[org\]\] <point>"
      (org-link-edit--on-link-p)))
   ;; Not on a link
   (should-not
-   (org-test-with-temp-text " \[\[http://orgmode.org/\]\[org\]\]"
+   (org-test-with-temp-text " \[\[https://orgmode.org/\]\[org\]\]"
      (org-link-edit--on-link-p)))
   (should-not
    (org-test-with-temp-text "not a link"
@@ -628,15 +628,15 @@ website"
   "Test `org-link-edit--link-data'."
   ;; Plain link
   (cl-multiple-value-bind (beg end link desc)
-      (org-test-with-temp-text "http://orgmode.org/"
+      (org-test-with-temp-text "https://orgmode.org/"
         (org-link-edit--link-data))
-    (should (string= link "http://orgmode.org/"))
+    (should (string= link "https://orgmode.org/"))
     (should-not desc))
   ;; Bracket link
   (cl-multiple-value-bind (beg end link desc)
-      (org-test-with-temp-text "\[\[http://orgmode.org/\]\[org\]\]"
+      (org-test-with-temp-text "\[\[https://orgmode.org/\]\[org\]\]"
         (org-link-edit--link-data))
-    (should (string= link "http://orgmode.org/"))
+    (should (string= link "https://orgmode.org/"))
     (should (string= desc "org"))))
 
 (ert-deftest test-org-link-edit/forward-blob ()

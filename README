@@ -10,23 +10,13 @@ contributed packages: <https://orgmode.org/org.html#Installation>.
 Contributing
 ------------
 
-Bug reports, questions, and other feedback are welcome.  Please send a
-plain-text email, with "[org-link-edit]" as the subject prefix, to
+Bug reports, patches, questions, and other feedback are welcome.
+Please send a plain-text email, with "[org-link-edit]" as the subject
+prefix, to
 
     misc@inbox.kyleam.com
 
-Messages that include this address are public and available as
-public-inbox [^1] archives at
-
-    https://inbox.kyleam.com/misc/?q=s%3Aorg-link-edit
-
-If you'd like to contribute a patch, thank you!  To keep open the
-possibility of including org-link-edit.el into Org proper or ELPA,
-contributors are required to assign copyright [^2] to the Free
-Software Foundation for most changes.
-
-Please send patches to the address listed above.  You can generate the
-patch with
+To add this prefix to patches, you can generate the them with
 
     git format-patch --subject-prefix="PATCH org-link-edit" ...
 
@@ -34,6 +24,11 @@ To avoid passing --subject-prefix each time you call format-patch, you
 can configure the repository's default prefix:
 
     git config format.subjectPrefix "PATCH org-link-edit"
+
+Messages that include this address are public and available as
+public-inbox [^1] archives at
+
+    https://inbox.kyleam.com/misc/?q=s%3Aorg-link-edit
 
 [^1]: https://public-inbox.org/README
 [^2]: https://www.gnu.org/software/emacs/manual/html_node/emacs/Copyright-Assignment.html

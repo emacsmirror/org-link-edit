@@ -3,9 +3,6 @@ Org Link Edit provides Paredit-inspired slurping and barfing commands
 for Org link descriptions.
 
 The commentary in org-link-edit.el contains more details.
-org-link-edit.el is available in Org's contrib directory.  See the Org
-manual's installation instructions for information on using
-contributed packages: <https://orgmode.org/org.html#Installation>.
 
 Contributing
 ------------

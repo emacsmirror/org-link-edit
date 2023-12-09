@@ -18,5 +18,8 @@ clean:
 
 %-autoloads.el: %.el
 	@$(BATCH) --eval \
-	"(let (make-backup-files) \
-	  (update-file-autoloads \"$(CURDIR)/$<\" t \"$(CURDIR)/$@\"))"
+	"(let ((make-backup-files nil)) \
+	   (if (fboundp 'loaddefs-generate) \
+	       (loaddefs-generate default-directory \"$@\" \
+				  (list \"test-org-link-edit.el\")) \
+	     (update-file-autoloads \"$(CURDIR)/$<\" t \"$(CURDIR)/$@\")))"

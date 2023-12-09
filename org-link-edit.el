@@ -213,10 +213,10 @@ If N is negative, slurp trailing blobs instead of leading blobs."
 
 (defun org-link-edit--split-first-blobs (string n)
   "Split STRING into (N first blobs . other) cons cell.
-'N first blobs' contains all text from the start of STRING up to
-the start of the N+1 blob.  'other' includes the remaining text
+`N first blobs' contains all text from the start of STRING up to
+the start of the N+1 blob.  `other' includes the remaining text
 of STRING.  If the number of blobs in STRING is fewer than N,
-'other' is nil."
+`other' is nil."
   (when (< n 0) (user-error "N cannot be negative"))
   (with-temp-buffer
     (insert string)
@@ -230,10 +230,10 @@ of STRING.  If the number of blobs in STRING is fewer than N,
 
 (defun org-link-edit--split-last-blobs (string n)
   "Split STRING into (other . N last blobs) cons cell.
-'N last blobs' contains all text from the end of STRING back to
-the end of the N+1 last blob.  'other' includes the remaining
+`N last blobs' contains all text from the end of STRING back to
+the end of the N+1 last blob.  `other' includes the remaining
 text of STRING.  If the number of blobs in STRING is fewer than
-N, 'other' is nil."
+N, `other' is nil."
   (when (< n 0) (user-error "N cannot be negative"))
   (with-temp-buffer
     (insert string)

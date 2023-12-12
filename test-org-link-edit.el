@@ -1,4 +1,4 @@
-;;; test-org-link-edit.el --- Tests for org-link-edit.el
+;;; test-org-link-edit.el --- Tests for org-link-edit.el  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2015-2020 Kyle Meyer <kyle@kyleam.com>
 

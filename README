@@ -13,7 +13,7 @@ prefix, to
 
     misc@inbox.kyleam.com
 
-To add this prefix to patches, you can generate the them with
+To add this prefix to patches, you can generate them with
 
     git format-patch --subject-prefix="PATCH org-link-edit" ...
 
